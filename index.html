@@ -18,7 +18,7 @@
         <h3>Enemies Available To Attack</h3>
         <div class="available_enemies" width="100%"></div>
         <h3>Fight Selection</h3>
-        <button id="fight">Attack</button>
+        <button id="fight" enabled>Attack</button>
         <h3>Defender</h3>
         <div class="defender_hero"></div>
     </div>
@@ -29,6 +29,7 @@
             isSelectDefender: false,
             defender_hp: 0,
             hero_hp: 0,
+            game_over: false,
             heroes : [{
                 name: "Obi-Wan Kenobi",
                 health_points: 120,
@@ -70,6 +71,7 @@
                     name.text(hero.name);
                     image.attr("src",hero.src);
                     hp.text("" + hero.health_points);
+                    hp.addClass("hp")
                     heroDiv.addClass("hero");
                     heroDiv.attr("style","float:left;width:125px;height:125px");
                     heroDiv.attr("health_points",hero.health_points);
@@ -83,7 +85,7 @@
                 //add click events   
                 $(".hero").click(function(){
                     if(starWars.isSelectHero == false){
-                        this.hero_hp = $(this).attr("health_points");
+                        starWars.hero_hp = $(this).attr("health_points");
                         starWars.isSelectHero = true;
                         $(".character").append($(this));
                         $(this).css("float","none");
@@ -94,7 +96,7 @@
                         $(".available_enemies").children().last().css("float","none");
                     }else if(starWars.isSelectDefender == false){
                         starWars.isSelectDefender = true;
-                        this.defender_hp = $(this).attr("health_points");
+                        starWars.defender_hp = $(this).attr("health_points");
                         $(".defender_hero").append($(this));
                         $(".available_enemies").children().last().css("float","none");
                         $(this).addClass("defender");
@@ -106,13 +108,30 @@
                     var hero = $(".selected_hero");
                     var defender = $(".defender");
 
-                    starWars.defender_hp = parseInt(defender.attr("health_points")) - parseInt(hero.attr("attack_power"));
-                    starWars.hero_hp = parseInt(hero.attr("health_points")) - parseInt(defender.attr("counter_attack_power"));
+                    starWars.defender_hp = parseInt(starWars.defender_hp) - parseInt(hero.attr("attack_power"));
+                    starWars.hero_hp = parseInt(starWars.hero_hp) - parseInt(defender.attr("counter_attack_power"));
                     starWars.updateGame();
                 })
             },
             updateGame:function(){
+                $(".defender .hp").text(this.defender_hp);
+                $(".selected_hero .hp").text(this.hero_hp);
+                var hero_attack_power = 0;
+                if(this.hero_hp <= 0){
+                    // end game. Hero died.
+                    this.game_over = true;
+                }else{
+                    //hero still alive, power up!
+                    hero_attack_power = parseInt($(".selected_hero").attr("attack_power")) * 2;
+                    $(".selected_hero").attr("attack_power",hero_attack_power);
+                }
                 
+                if(this.defender_hp <=0 && !this.game_over){
+                    // defender died. 
+                    $(".defender").remove();
+                    starWars.isSelectDefender = false;
+                }
+
             }
             
         }
