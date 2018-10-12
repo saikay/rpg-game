@@ -1,0 +1,25 @@
+.ken { 
+    width:70px; height:80px; /* exactly the size of an image in our sprite */
+    background-image:url('../ken.png'); 
+}
+
+/* css */
+.punch { 
+    animation: punch steps(3) 0.5s infinite; 
+}
+@keyframes punch {
+    from { background-position:0px -160px; }
+    to { background-position:-210px -160px; }
+}
+
+.stance{
+    animation: stance steps(4) 0.5s infinite;
+}
+
+@keyframes stance {
+    from { background-position:0px -80px; }
+    to { background-position:-280px -80px; }
+}
+
+$spriteWidth: 70px;
+$spriteHeight: 80px;

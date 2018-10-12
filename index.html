@@ -107,26 +107,31 @@
                 $("#fight").click(function(){
                     var hero = $(".selected_hero");
                     var defender = $(".defender");
-
-                    starWars.defender_hp = parseInt(starWars.defender_hp) - parseInt(hero.attr("attack_power"));
-                    starWars.hero_hp = parseInt(starWars.hero_hp) - parseInt(defender.attr("counter_attack_power"));
-                    starWars.updateGame();
+                    if(!starWars.game_over){
+                        starWars.defender_hp = parseInt(starWars.defender_hp) - parseInt(hero.attr("attack_power"));
+                        starWars.hero_hp = parseInt(starWars.hero_hp) - parseInt(defender.attr("counter_attack_power"));
+                        starWars.updateGame();
+                    }else{
+                        alert("Game Over");
+                    }
+                    
                 })
             },
             updateGame:function(){
                 $(".defender .hp").text(this.defender_hp);
                 $(".selected_hero .hp").text(this.hero_hp);
                 var hero_attack_power = 0;
-                if(this.hero_hp <= 0){
+                if(starWars.hero_hp <= 0){
                     // end game. Hero died.
-                    this.game_over = true;
+                    starWars.game_over = true;
+                    console.log("game over");
                 }else{
                     //hero still alive, power up!
                     hero_attack_power = parseInt($(".selected_hero").attr("attack_power")) * 2;
                     $(".selected_hero").attr("attack_power",hero_attack_power);
                 }
                 
-                if(this.defender_hp <=0 && !this.game_over){
+                if(starWars.defender_hp <=0 && !starWars.game_over){
                     // defender died. 
                     $(".defender").remove();
                     starWars.isSelectDefender = false;
