@@ -1,7 +1,7 @@
 $protrait_height:33px;
 $protrait_width:33px;
 $coor_x:-129px;
-$coor_y:-450px;
+$coor_y:-452px;
 $hover_coor_x:-260px;
 $hover_coor_y:-452px;
 $character_big_x: 112px;
@@ -18,35 +18,38 @@ body{
 .characters_box{
     height: 33px;
     width: 150px;
-    transform:scale(2,2);
+    transform:scale(3,3);
     margin-left:auto;
     margin-right:auto;
 }
 
+.protraits{
+    background-image: url("../images/protraits.png");
+}
 .character{
    height: $protrait_height;
    width: $protrait_width;
-   background-image: url("../images/protraits.png");
+   margin-top: 16px;
 }
 
 
-.player{
-    height: 112px;
-    width: 112px;
-    transform: scale(2, 2);
-    background-image: url("../images/protraits.png");
-    position:absolute;
-    left: 112px;
- }
+.player {
+	height: 112px;
+	width: 112px;
+	transform: scale(3, 3);
+	position: absolute;
+	left: 224px;
+	top: 150px;
+}
 
-.defender{
-    height: 112px;
-    width: 112px;
-    transform: scale(2, 2);
-    background-image: url("../images/protraits.png");
-    position:absolute;
-    right:112px;
- }
+.defender {
+	height: 112px;
+	width: 112px;
+	transform: scale(3, 3);
+	position: absolute;
+	right: 224px;
+	top: 150px;
+}
 
 @mixin character($name,$p_row, $p_col){
     .#{$name}{

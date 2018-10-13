@@ -1,50 +1,54 @@
-body{
-    background-image: url("../images/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color: black;
+body {
+	background-image: url("../images/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom bottom;
+	background-color: black;
 }
 
 .characters_box {
 	height: 33px;
 	width: 150px;
-	transform: scale(2, 2);
+	transform: scale(3, 3);
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.protraits{
+    background-image: url("../images/protraits.png");
 }
 
 .character {
 	height: 33px;
 	width: 33px;
-	background-image: url("../images/protraits.png");
+	margin-top: 16px;
 }
 
 .player {
 	height: 112px;
 	width: 112px;
-	transform: scale(2, 2);
-	background-image: url("../images/protraits.png");
+	transform: scale(3, 3);
 	position: absolute;
-	left: 112px;
+	left: 224px;
+	top: 150px;
 }
 
 .defender {
 	height: 112px;
 	width: 112px;
-	transform: scale(2, 2);
-	background-image: url("../images/protraits.png");
+	transform: scale(3, 3);
 	position: absolute;
-	right: 112px;
+	right: 224px;
+	top: 150px;
 }
 
 .ryu {
 	display: inline-block;
-	background-position: -129px -450px;
+	background-position: -129px -452px;
 }
 
 .ryu:hover {
-	background-position: -260px -451px;
+	background-position: -260px -452px;
 }
 
 .ryu_big {
@@ -54,11 +58,11 @@ body{
 
 .chunli {
 	display: inline-block;
-	background-position: -162px -450px;
+	background-position: -162px -452px;
 }
 
 .chunli:hover {
-	background-position: -293px -451px;
+	background-position: -293px -452px;
 }
 
 .chunli_big {
@@ -68,11 +72,11 @@ body{
 
 .ken {
 	display: inline-block;
-	background-position: -228px -450px;
+	background-position: -228px -452px;
 }
 
 .ken:hover {
-	background-position: -359px -451px;
+	background-position: -359px -452px;
 }
 
 .ken_big {
@@ -82,11 +86,11 @@ body{
 
 .guy {
 	display: inline-block;
-	background-position: -129px -483px;
+	background-position: -129px -485px;
 }
 
 .guy:hover {
-	background-position: -260px -484px;
+	background-position: -260px -485px;
 }
 
 .guy_big {
@@ -96,11 +100,11 @@ body{
 
 .bison {
 	display: inline-block;
-	background-position: -129px -516px;
+	background-position: -129px -518px;
 }
 
 .bison:hover {
-	background-position: -260px -517px;
+	background-position: -260px -518px;
 }
 
 .bison_big {
