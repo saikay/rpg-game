@@ -5,24 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <!--link rel="stylesheet" type="text/css" href="assets/ken.css"-->
+    <link rel="stylesheet" type="text/css" href="assets/characters.css">
     <title>Star Wars RPG Game</title>
 </head>
 <body>
-    <h1 style="text-align:center">Star Wars RPG!</h1>
-    <div style="width:500px">
-    <div class="hero_selection" width= "100%"></div>
-    <h3 >Your Character</h3>
-    <div class="character"></div>
-    <div width="500px">
-        <h3>Enemies Available To Attack</h3>
-        <div class="available_enemies" width="100%"></div>
-        <h3>Fight Selection</h3>
-        <button id="fight" enabled>Attack</button>
-        <h3>Defender</h3>
-        <div class="defender_hero"></div>
+    <h1 style="text-align:center; font-size:42px; color:white; font-style:italic; font-weight: bolder">Street Fighter!</h1>
+    <div width="100%">
+        <div class="player ryu_big"></div>
+        <div class="defender ryu_big"></div>
+        <div>
+            <h3 style="text-align:center">Select a Character</h1>
+                <div class="characters_box">
+                <div class="character guy" ></div>
+                <div class="character ken" ></div>
+                <div class="character ryu" ></div>
+                <div class="character bison" ></div>
+            </div>
+        </div>
     </div>
-    </div>
+        <div width="500px">
+            <h3>Enemies Available To Attack</h3>
+            <div class="available_enemies" width="100%"></div>
+            <h3>Fight Selection</h3>
+            <button id="fight" enabled>Attack</button>
+            <h3>Defender</h3>
+            <div class="defender_hero"></div>
+        </div>
+    
     <script>
         var starWars = {
             isSelectHero: false,

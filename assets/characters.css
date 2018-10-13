@@ -1,0 +1,109 @@
+body{
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: black;
+}
+
+.characters_box {
+	height: 33px;
+	width: 150px;
+	transform: scale(2, 2);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.character {
+	height: 33px;
+	width: 33px;
+	background-image: url("../images/protraits.png");
+}
+
+.player {
+	height: 112px;
+	width: 112px;
+	transform: scale(2, 2);
+	background-image: url("../images/protraits.png");
+	position: absolute;
+	left: 112px;
+}
+
+.defender {
+	height: 112px;
+	width: 112px;
+	transform: scale(2, 2);
+	background-image: url("../images/protraits.png");
+	position: absolute;
+	right: 112px;
+}
+
+.ryu {
+	display: inline-block;
+	background-position: -129px -450px;
+}
+
+.ryu:hover {
+	background-position: -260px -451px;
+}
+
+.ryu_big {
+	display: inline-block;
+	background-position: 0px 0px;
+}
+
+.chunli {
+	display: inline-block;
+	background-position: -162px -450px;
+}
+
+.chunli:hover {
+	background-position: -293px -451px;
+}
+
+.chunli_big {
+	display: inline-block;
+	background-position: -112px 0px;
+}
+
+.ken {
+	display: inline-block;
+	background-position: -228px -450px;
+}
+
+.ken:hover {
+	background-position: -359px -451px;
+}
+
+.ken_big {
+	display: inline-block;
+	background-position: -336px 0px;
+}
+
+.guy {
+	display: inline-block;
+	background-position: -129px -483px;
+}
+
+.guy:hover {
+	background-position: -260px -484px;
+}
+
+.guy_big {
+	display: inline-block;
+	background-position: 0px -112px;
+}
+
+.bison {
+	display: inline-block;
+	background-position: -129px -516px;
+}
+
+.bison:hover {
+	background-position: -260px -517px;
+}
+
+.bison_big {
+	display: inline-block;
+	background-position: 0px -224px;
+}

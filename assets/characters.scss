@@ -1,0 +1,72 @@
+$protrait_height:33px;
+$protrait_width:33px;
+$coor_x:-129px;
+$coor_y:-450px;
+$hover_coor_x:-260px;
+$hover_coor_y:-452px;
+$character_big_x: 112px;
+$character_big_y: 112px;
+
+body{
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: black;
+}
+
+.characters_box{
+    height: 33px;
+    width: 150px;
+    transform:scale(2,2);
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.character{
+   height: $protrait_height;
+   width: $protrait_width;
+   background-image: url("../images/protraits.png");
+}
+
+
+.player{
+    height: 112px;
+    width: 112px;
+    transform: scale(2, 2);
+    background-image: url("../images/protraits.png");
+    position:absolute;
+    left: 112px;
+ }
+
+.defender{
+    height: 112px;
+    width: 112px;
+    transform: scale(2, 2);
+    background-image: url("../images/protraits.png");
+    position:absolute;
+    right:112px;
+ }
+
+@mixin character($name,$p_row, $p_col){
+    .#{$name}{
+        display:inline-block;
+        background-position: (-($p_row * $protrait_width) + $coor_x) (-($p_col * $protrait_height) + $coor_y);
+    }
+
+    .#{$name}:hover{
+        background-position: (-($p_row * $protrait_width) + $hover_coor_x) (-($p_col * $protrait_height) + $hover_coor_y);        
+    }
+
+    .#{$name}_big{
+        display: inline-block;
+        background-position: ( -$character_big_x * $p_row) (-$character_big_y * $p_col);
+    }
+}
+
+@include character($name:ryu, $p_row:0, $p_col: 0);
+@include character($name:chunli, $p_row:1, $p_col: 0);
+@include character($name:ken, $p_row:3, $p_col: 0);
+@include character($name:guy, $p_row:0, $p_col: 1);
+@include character($name:bison, $p_row:0, $p_col: 2);
+

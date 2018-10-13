@@ -1,0 +1,35 @@
+.ken { 
+    width:70px; 
+    max-width: 90px;
+    height:99px; /* exactly the size of an image in our sprite */
+    background-image:url('../images/ken.png'); 
+}
+
+/* css */
+.punch { 
+    width: 200px;
+    animation: punch steps(2) 0.5s infinite; 
+}
+
+/* -256px top
+   25px left */ 
+@keyframes punch {
+    0% { width: 100px; background-position:-25px -260px; }
+    25% { width: 115px; background-position:-188px -260px;}
+    100% { width: 90px; background-position:-220px -260px;}
+    /*100% { background-position:-415px -256px; }*/
+}
+
+.stance{
+    animation: stance steps(6) 0.8s infinite;
+}
+
+/* -31px for padding above target image. 
+-25px for padding left of the target image.*/
+@keyframes stance {
+    from { background-position:-25px -31px; }
+    to { background-position:-460px -31px; }
+}
+
+$spriteWidth: 70px;
+$spriteHeight: 80px;
