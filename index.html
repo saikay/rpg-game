@@ -7,152 +7,181 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--link rel="stylesheet" type="text/css" href="assets/ken.css"-->
     <link rel="stylesheet" type="text/css" href="assets/characters.css">
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
-    <title>Star Wars RPG Game</title>
+    <title>Street Fighter</title>
 </head>
 <body>
     <h1 style="text-align:center; font-size:42px; color:white; font-style:italic; font-weight: bolder">Street Fighter!</h1>
-    <div width="100%">
-        <div class="player protraits ryu_big "></div>
-        <div class="defender protraits ryu_big"></div>
+    <div class="container" >
+        <div class="player protraits ken_big" name="ken_big"><div class="hp">260</div></div>
+        <div class="defender protraits chunli_big" name="chunli_big"><div class="hp">150</div></div>
         <div>
             <h3 style="text-align:center;font-weight:bold; color:white;">Select a Character</h1>
                 <div class="characters_box ">
-                <div class="character protraits guy" ></div>
-                <div class="character protraits ken" ></div>
-                <div class="character protraits ryu" ></div>
-                <div class="character protraits bison" ></div>
-            </div>
+                </div>
         </div>
     </div>
-        <div width="500px">
-            <h3>Enemies Available To Attack</h3>
-            <div class="available_enemies" width="100%"></div>
-            <h3>Fight Selection</h3>
-            <button id="fight" enabled>Attack</button>
-            <h3>Defender</h3>
-            <div class="defender_hero"></div>
-        </div>
-    
+    <div class="message_container">
+        <div><span class="message"></span></div>
+        <button id="fight" enabled>Fight!</button>
+     </div>     
     <script>
-        var starWars = {
-            isSelectHero: false,
-            isSelectDefender: false,
-            defender_hp: 0,
-            hero_hp: 0,
+        var messageSelectPlayer = "Select Player";
+        var messageSelectOpponent = "Select Opponent";
+        var messageFight = "Press Fight to begin battle!";
+        var messageGameOver = "Game Over";
+        var messageYouWin = "You Win";
+
+        //selectable characters
+        var characters = [{
+                name:"Guy",
+                hp: 180,
+                atk: 50,
+                counter_atk: 50
+            },
+            {
+                name:"Ken",
+                hp: 260,
+                atk: 50,
+                counter_atk: 75
+            },
+            {
+                name:"Chunli",
+                hp: 150,
+                atk: 50,
+                counter_atk: 80
+            },
+            {
+                name:"Bison",
+                hp: 300,
+                atk: 75,
+                counter_atk: 90
+            }]
+
+        //game logic
+        var streetFighters = {
+            isPlayerSelectedCharacter: false,
+            isSelectedDefender: false,
             game_over: false,
-            heroes : [{
-                name: "Obi-Wan Kenobi",
-                health_points: 120,
-                attack_power: 2,
-                counter_attack_power: 25,
-                src: "Test.jpg"
-            },
-            {
-                name: "Luke Skywalker",
-                health_points: 100,
-                attack_power: 2,
-                counter_attack_power: 10,
-                src: "Test.jpg"
-            },
-            {
-                name: "Darth Sidious",
-                health_points: 150,
-                attack_power: 2,
-                counter_attack_power: 30,
-                src: "Test.jpg"
-            },
-            {
-                name: "Darth Maul",
-                health_points: 180,
-                attack_power: 2,
-                counter_attack_power: 35,
-                src:"Test.jpg"
-            }],
+            
+            //initiate game and reset game.
             initiateGame: function () {
-                var characters = $(".hero_selection");
-                this.isSelectHero = false;
-                this.isSelectDefender = false;
+                this.game_over = false;
+                this.isPlayerSelectedCharacter = false;
+                this.isSelectedDefender = false;
+                var player = $(".player");
+                var defender = $(".defender");
+                player.removeClass("dead");
+                player.removeClass(player.attr("name"));
+                player.children().text(150);
+                player.removeAttr("atk");
+                defender.removeClass(defender.attr("name"));
+                defender.children().text(150); 
+                defender.removeClass("dead");
+                defender.removeAttr("counter_atk");
+                $(".characters_box").empty();
+                $(".message").text(messageSelectPlayer);
+                //unbind previous click, seem like modify button will bound extra click event.
+                $("#fight").unbind("click");
+                $("#fight").text("Fight!");
+                $("#fight").prop("disabled",true);
                 //create a div for each hero
-                this.heroes.forEach(function(hero){
-                    var heroDiv = $("<div>");
-                    var name = $("<span>");
-                    var image = $("<img>");
-                    var hp = $("<span>");
-                    name.text(hero.name);
-                    image.attr("src",hero.src);
-                    hp.text("" + hero.health_points);
-                    hp.addClass("hp")
-                    heroDiv.addClass("hero");
-                    heroDiv.attr("style","float:left;width:125px;height:125px");
-                    heroDiv.attr("health_points",hero.health_points);
-                    heroDiv.attr("attack_power",hero.attack_power);
-                    heroDiv.attr("counter_attack_power",hero.counter_attack_power);
-                    heroDiv.append(name);
-                    heroDiv.append(image);
-                    heroDiv.append(hp);
-                    $(".hero_selection").append(heroDiv);
+                characters.forEach(function(character){
+                    var characterDiv = $("<div>");
+                    characterDiv.addClass("character protraits " + character.name.toLowerCase());
+                    characterDiv.attr("name",character.name);
+                    characterDiv.attr("hp", character.hp);
+                    characterDiv.attr("atk",character.atk);
+                    characterDiv.attr("counter_atk",character.counter_atk);
+                    $(".characters_box").append(characterDiv);
                 }); 
+
                 //add click events   
-                $(".hero").click(function(){
-                    if(starWars.isSelectHero == false){
-                        starWars.hero_hp = $(this).attr("health_points");
-                        starWars.isSelectHero = true;
-                        $(".character").append($(this));
-                        $(this).css("float","none");
-                        $(this).addClass("selected_hero");
-                        $(".available_enemies").append($(".hero_selection").children());
-                        $(".available_enemies").children().removeClass("hero");
-                        $(".available_enemies").children().addClass("enemy");
-                        $(".available_enemies").children().last().css("float","none");
-                    }else if(starWars.isSelectDefender == false){
-                        starWars.isSelectDefender = true;
-                        starWars.defender_hp = $(this).attr("health_points");
-                        $(".defender_hero").append($(this));
-                        $(".available_enemies").children().last().css("float","none");
-                        $(this).addClass("defender");
-                        $(this).css("float","none");
+                $(".character").click(function(){
+                    var player = $(".player");
+                    var defender = $(".defender");
+                    $(this).addClass("dead");
+                    $(this).unbind("click");
+                    if(!streetFighters.isPlayerSelectedCharacter){
+                        var previousName = player.attr("name");
+                        var name = $(this).attr("name").toLowerCase() + "_big";
+                        streetFighters.isPlayerSelectedCharacter = true;
+                        player.removeClass(previousName);
+                        player.addClass(name);
+                        player.attr("name",name);
+                        player.attr("atk", $(this).attr("atk"));
+                        player.children().text($(this).attr("hp"));
+                        $(".message").text(messageSelectOpponent);
+                    }else if(!streetFighters.isSelectedDefender){
+                        var previousName = defender.attr("name");
+                        var name = $(this).attr("name").toLowerCase() + "_big";
+                        streetFighters.isSelectedDefender = true;
+                        defender.removeClass("dead");
+                        defender.removeClass(previousName);
+                        defender.removeAttr("counter_atk");
+                        defender.addClass(name);
+                        defender.attr("name",name);
+                        defender.attr("counter_atk", $(this).attr("counter_atk"));
+                        defender.children().text($(this).attr("hp"));
+                        $(".message").text(messageFight);
+                        $("#fight").prop("disabled",false);
                     }
-                });
+                }),
 
                 $("#fight").click(function(){
-                    var hero = $(".selected_hero");
+                    var player = $(".player");
+                    var player_hp = parseInt(player.children().text());
+                    var player_atk = parseInt(player.attr("atk"));
                     var defender = $(".defender");
-                    if(!starWars.game_over){
-                        starWars.defender_hp = parseInt(starWars.defender_hp) - parseInt(hero.attr("attack_power"));
-                        starWars.hero_hp = parseInt(starWars.hero_hp) - parseInt(defender.attr("counter_attack_power"));
-                        starWars.updateGame();
+                    var defender_hp = parseInt(defender.children().text());
+                    var defender_atk = parseInt(defender.attr("counter_atk"));
+                    
+                    if(!streetFighters.game_over){
+                        defender_hp = defender_hp - player_atk;
+                        player_hp = player_hp - defender_atk;
+                        
+                        //increase attack 
+                        player.attr("atk",player_atk * 2);
+
+                        //update character hp
+                        if(player_hp<1){
+                            player_hp=0;
+                        }
+                        if(defender_hp<1){
+                            defender_hp=0;
+                        }
+                        player.children().text(player_hp);
+                        defender.children().text(defender_hp);
                     }else{
-                        alert("Game Over");
+                        //reset game
+                        streetFighters.initiateGame();
+                        return false;
+                    }
+
+                    if(player_hp<1){
+                        streetFighters.game_over = true;
+                        player.addClass("dead");
+                        $(".message").text(messageGameOver);
+                        $("#fight").text("Restart");
+                    }else if(defender_hp <1){
+                        streetFighters.isSelectedDefender=false;
+                        defender.addClass("dead");
+                        
+                        //check if all characters are dead
+                        if($(".characters_box").children(".dead").length ==4){
+                            $(".message").text(messageYouWin);
+                            $("#fight").text("Restart");
+                        }else{
+                        $(".message").text(messageSelectOpponent);
+                        }
+                        
+                        $("#fight").prop("disabled",true);
                     }
                     
                 })
-            },
-            updateGame:function(){
-                $(".defender .hp").text(this.defender_hp);
-                $(".selected_hero .hp").text(this.hero_hp);
-                var hero_attack_power = 0;
-                if(starWars.hero_hp <= 0){
-                    // end game. Hero died.
-                    starWars.game_over = true;
-                    console.log("game over");
-                }else{
-                    //hero still alive, power up!
-                    hero_attack_power = parseInt($(".selected_hero").attr("attack_power")) * 2;
-                    $(".selected_hero").attr("attack_power",hero_attack_power);
-                }
-                
-                if(starWars.defender_hp <=0 && !starWars.game_over){
-                    // defender died. 
-                    $(".defender").remove();
-                    starWars.isSelectDefender = false;
-                }
-
             }
-            
         }
         
-        starWars.initiateGame();
+        streetFighters.initiateGame();
         
 
     </script>

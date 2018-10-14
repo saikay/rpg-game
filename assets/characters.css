@@ -8,14 +8,14 @@ body {
 
 .characters_box {
 	height: 33px;
-	width: 150px;
+	width: 140px;
 	transform: scale(3, 3);
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.protraits{
-    background-image: url("../images/protraits.png");
+.protraits {
+	background-image: url("../images/protraits.png");
 }
 
 .character {
@@ -25,20 +25,20 @@ body {
 }
 
 .player {
-	height: 112px;
-	width: 112px;
-	transform: scale(3, 3);
+	height: 110px;
+	width: 129px;
+	transform: scale(2, 2);
 	position: absolute;
-	left: 224px;
+	left: 10%;
 	top: 150px;
 }
 
 .defender {
-	height: 112px;
-	width: 112px;
-	transform: scale(3, 3);
+	height: 110px;
+	width: 129px;
+	transform: scale(-2, 2);
 	position: absolute;
-	right: 224px;
+	right: 10%;
 	top: 150px;
 }
 
@@ -53,7 +53,7 @@ body {
 
 .ryu_big {
 	display: inline-block;
-	background-position: 0px 0px;
+	background-position: 0px -3px;
 }
 
 .chunli {
@@ -67,7 +67,7 @@ body {
 
 .chunli_big {
 	display: inline-block;
-	background-position: -112px 0px;
+	background-position: -129px -3px;
 }
 
 .ken {
@@ -81,7 +81,7 @@ body {
 
 .ken_big {
 	display: inline-block;
-	background-position: -336px 0px;
+	background-position: -387px -3px;
 }
 
 .guy {
@@ -95,7 +95,7 @@ body {
 
 .guy_big {
 	display: inline-block;
-	background-position: 0px -112px;
+	background-position: 0px -113px;
 }
 
 .bison {
@@ -109,5 +109,56 @@ body {
 
 .bison_big {
 	display: inline-block;
-	background-position: 0px -224px;
+	background-position: 0px -223px;
+}
+
+.dead{
+	filter: grayscale(100%);
+}
+
+.hp{
+    position: absolute;
+	bottom: 0px;
+	text-align: center;
+    background-color: greenyellow;
+    color: green;
+    width: 100%;
+
+}
+
+.container{
+    width: 100%;
+    height: 220px;
+}
+
+.message{
+	color: white;
+	font-size: 32px;	
+	font-weight: bolder;
+	background-color: gray;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.message_container{
+	width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/*flip hp text back to normal */
+.defender .hp{
+	transform: scale(-1,1);
+}
+
+button{
+	width: 250px;
+    height: 100px;
+    font-size: 50px;
+    border-radius: 15px;
+    background-color: darkred;
+    color: yellow;
+    font-weight: 900;
+    font-style: italic;
 }
