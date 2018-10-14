@@ -21,6 +21,7 @@
         </div>
     </div>
     <div class="message_container">
+        <div><span class="combat_text"></span></div>
         <div><span class="message"></span></div>
         <button id="fight" enabled>Fight!</button>
      </div>     
@@ -80,6 +81,7 @@
                 defender.removeAttr("counter_atk");
                 $(".characters_box").empty();
                 $(".message").text(messageSelectPlayer);
+                $(".combat_text").text("");
                 //unbind previous click, seem like modify button will bound extra click event.
                 $("#fight").unbind("click");
                 $("#fight").text("Fight!");
@@ -93,7 +95,7 @@
                     characterDiv.attr("atk",character.atk);
                     characterDiv.attr("counter_atk",character.counter_atk);
                     $(".characters_box").append(characterDiv);
-                }); 
+                }),
 
                 //add click events   
                 $(".character").click(function(){
@@ -134,11 +136,11 @@
                     var defender = $(".defender");
                     var defender_hp = parseInt(defender.children().text());
                     var defender_atk = parseInt(defender.attr("counter_atk"));
-                    
+                    var combat_text = "";
                     if(!streetFighters.game_over){
                         defender_hp = defender_hp - player_atk;
                         player_hp = player_hp - defender_atk;
-                        
+                        $(".combat_text").text("Player attack for " + player_atk + " damage, Opponent counter attack for " + defender_atk + " damage.")
                         //increase attack 
                         player.attr("atk",player_atk * 2);
 
@@ -168,13 +170,15 @@
                         
                         //check if all characters are dead
                         if($(".characters_box").children(".dead").length ==4){
+                            streetFighters.game_over = true;
                             $(".message").text(messageYouWin);
                             $("#fight").text("Restart");
                         }else{
-                        $(".message").text(messageSelectOpponent);
+                            $(".message").text(messageSelectOpponent);
+                            $("#fight").prop("disabled",true);
                         }
                         
-                        $("#fight").prop("disabled",true);
+                        
                     }
                     
                 })

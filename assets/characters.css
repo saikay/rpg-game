@@ -131,7 +131,8 @@ body {
     height: 220px;
 }
 
-.message{
+
+.combat_text, .message{
 	color: white;
 	font-size: 32px;	
 	font-weight: bolder;
